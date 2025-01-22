@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class = "login-register-container">
+<h2>Available Cars in {{ search_form.cleaned_data.city }}
+    from {{ search_form.cleaned_data.start_date }}
+    until {{ search_form.cleaned_data.end_date }}</h2>
+
+{% if available_cars %}
+    <ul>
+        {% for car in available_cars %}
+            <li>
+                <strong>{{ car.brand }} {{ car.model }}</strong> ({{ car.year }}) - ${{ car.dailyPrice }}/day
+                {% if car.image %}
+                    <br>
+                    <img src="{{ car.image.url }}" alt="{{ car.model }}" width="200">
+                {% endif %}
+                <br>
+
+                {% if user.is_authenticated %}
+
+                    <a href="{% url 'book_car' car.id %}?start_date={{ search_form.cleaned_data.start_date|date:'Y-m-d' }}&end_date={{ search_form.cleaned_data.end_date|date:'Y-m-d' }}">
+                        <button>Book This Car</button>
+                    </a>
+
+                {% else %}
+
+                    <p style="color: red; font-weight: bold;">
+                        You must <a href="{% url 'login' %}">log in</a> to book this car.
+                    </p>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No cars are available for the selected dates in {{ search_form.cleaned_data.city }}.</p>
+{% endif %}
+
+<a href="{% url 'search' %}">Search Again</a>
+    </div>
+{% endblock %}

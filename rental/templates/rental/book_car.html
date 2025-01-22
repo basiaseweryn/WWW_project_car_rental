@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class = "login-register-container">
+<h2>Book your car:</h2>
+<strong>{{ car.brand }} {{ car.model }}</strong> ({{ car.year }}) - ${{ car.dailyPrice }}/day
+                {% if car.image %}
+                    <br>
+                    <img src="{{ car.image.url }}" alt="{{ car.model }}" width="200">
+                {% endif %}
+                <br>
+<form method="post" id="booking-form" action="{% url 'book_car' car.id %}?start_date={{ request.GET.start_date }}&end_date={{ request.GET.end_date }}">
+    {% csrf_token %}
+
+    {{ form.is_driver_under_25.label_tag }} {{ form.is_driver_under_25 }} <br>
+    {{ form.is_not_driver.label_tag }} {{ form.is_not_driver }} <br>
+
+    <div id="driver-details" style="display: none; margin-top: 10px;">
+        <label for="driver_name">Driver's First Name:</label> {{ form.driver_name }}<br>
+        <label for="driver_surname">Driver's Last Name:</label> {{ form.driver_surname }}<br>
+        <label for="driver_license_number">Driver's License Number:</label> {{ form.driver_license_number }}<br>
+    </div>
+
+    {{ form.add_insurance.label_tag }} {{ form.add_insurance }} <br><br>
+
+    <h3>Price Breakdown:</h3>
+    <p>Base Price: $<span id="base-price">{{ base_price }}</span></p>
+    <p>Young Driver Fee: $<span id="young-driver-fee">0</span></p>
+    <p>Insurance Fee: $<span id="insurance-fee">0</span></p>
+    <p><strong>Total Price: $<span id="total-price">{{ base_price }}</span></strong></p>
+
+    <button type="submit">Confirm the Booking</button>
+</form>
+
+<script>
+    const isDriverUnder25 = document.getElementById("id_is_driver_under_25");
+    const isNotDriver = document.getElementById("id_is_not_driver");
+    const addInsurance = document.getElementById("id_add_insurance");
+
+    const basePrice = {{ base_price }};
+    const rentalDays = {{ rental_days }};
+
+    function updatePrice() {
+        let youngDriverFee = isDriverUnder25.checked ? 10 * rentalDays : 0;
+        //let insuranceFee = (addInsurance.checked ? (0.20 * basePrice).toFixed(2) : '0.00');
+        let insuranceFee = (addInsurance.checked ? (0.20 * basePrice) : 0.00);
+        insuranceFee = parseFloat(insuranceFee.toFixed(2));
+        let totalPrice = basePrice + youngDriverFee + insuranceFee;
+
+        document.getElementById("young-driver-fee").innerText = youngDriverFee;
+        document.getElementById("insurance-fee").innerText = insuranceFee.toFixed(2);
+        document.getElementById("total-price").innerText = totalPrice.toFixed(2);
+    }
+
+    // show driver details if is_not_driver
+    isNotDriver.addEventListener('change', function() {
+        document.getElementById("driver-details").style.display = this.checked ? "block" : "none";
+    });
+
+    //updating price as checkboxes are changed
+    isDriverUnder25.addEventListener('change', updatePrice);
+    addInsurance.addEventListener('change', updatePrice);
+</script>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class = "login-register-container">
+<h2>Account Details</h2>
+
+<div>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>License number:</strong> {{ user.license_number }}</p>
+</div>
+
+<div>
+    <a href="{% url 'rental_history_xml' %}">
+        <button>
+            View Rental History
+        </button>
+    </a>
+</div>
+    </div>
+
+    <div class = "login-register-container">
+        <h3>Your upcoming Bookings</h3>
+        {% if upcoming_bookings %}
+        <ul>
+            {% for booking in upcoming_bookings %}
+                <li>
+                    <strong>Car:</strong> {{ booking.car.brand }} {{ booking.car.model }}<br>
+                    <strong>City:</strong>{{ booking.car.city }}<br>
+                    <strong>Start date:</strong> {{ booking.start_date|date:"Y-m-d" }}<br>
+                    <strong>End Date:</strong> {{ booking.end_date|date:"Y-m-d" }}<br>
+                    <strong>Total Price:</strong> ${{ booking.total_price }}<br>
+
+                    {% if booking in cancellable_bookings %}
+                        <form method="post" action="{% url 'cancel_booking' booking.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Cancel Booking</button>
+                        </form>
+                    {% else %}
+                        <span>This booking cannot be canceled (less than 7 days to go).</span>
+                    {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no upcoming bookings.</p>
+    {% endif %}
+    </div>
+{% endblock %}

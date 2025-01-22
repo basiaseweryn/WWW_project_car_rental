@@ -1,0 +1,254 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: rgba(90, 104, 218, 0.73);
+    color: #190f60;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+header {
+		border-radius: 20px;
+		text-align: center;
+		padding: 10px;
+		margin: 20px;
+		position: relative;
+		overflow: hidden;
+}
+
+.top-nav {
+    width: 80%;
+    background-color: white;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    top: 0;
+    left: 0;
+    border:1px;
+    margin-left:10px;
+    margin-right: 10px;
+}
+
+.top-nav .logo {
+
+    padding: 10px;
+    font-size: 22px;
+    color: black;
+	text-align: left;
+}
+
+.wrapper {
+     height: 100%;
+    display: flex;
+	flex-direction: column;
+	margin-top: 10px;
+}
+
+.sidebar {
+    color:white;
+    border: 1px black;
+    width: 220px;
+    height: 100vh;
+    background-color: #4086ca;
+    padding-top: 20px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color:white;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    border: 1px rgba(99, 68, 177, 0.63) solid;
+    padding: 15px 20px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #FF69B4;
+    border-radius: 8px;
+}
+
+
+.content {
+    flex: 1;
+    background: linear-gradient(to top, #7c6cd7, #587dbf);
+    margin-right: 260px; /* Space for sidebar */
+    margin-left:10px;
+    margin-top:10px;
+    border-radius: 20px;
+    padding: 10px;
+    width: calc(100% - 260px);
+}
+
+
+h1, h2, h3, h4, h5 {
+    text-align: left;
+}
+
+.navbar {
+    background-color: rgba(123, 104, 238, 0.9);
+    padding: 10px 20px;
+}
+
+.navbar a {
+    color: #fff;
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+  	color: #FF69B4; /* Pink on hover */
+}
+
+button, .btn {
+    background-color: #FF69B4; /* Pink */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #FF1493; /* Darker Pink */
+}
+
+/* ✅ Container for the search form */
+.search-container {
+    border-radius: 20px;
+    text-align: left;
+    margin-top: 30px;
+    margin-left: 10px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.login-register-container {
+    border-radius: 20px;
+    text-align: left;
+    margin-top: 30px;
+    margin-left: 10px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ Align all form fields in a horizontal row */
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between fields */
+    flex-wrap: nowrap; /* Prevent wrapping to a new line */
+}
+
+/* ✅ Input fields styled for horizontal layout */
+.search-container input[type="text"],
+.search-container input[type="date"],
+.search-container select {
+    width: 200px;  /* Equal width for all fields */
+    padding: 10px;
+    border: 2px solid #FF69B4;
+    border-radius: 25px;
+    outline: none;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+}
+
+/* ✅ Stylish search button aligned with inputs */
+.search-container button {
+    padding: 10px 20px;
+    background-color: #FF69B4;
+    color: #fff;
+    border-radius: 25px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #FF1493;
+}
+
+/* ✅ Optional: Adjust the form group spacing */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*
+body {
+  position: relative;
+}
+
+body::after {
+  content: '';
+  display: block;
+  height: 50px;
+  /* Set same as footer's height */
+
+
+footer {
+    /*text-align: center;
+    padding: 15px;
+    background-color: rgb(88, 125, 191);
+    color: #333;
+	clear: both;
+
+    height: 20px;
+    margin-top: -200px;
+    bottom:0;
+    position: absolute;
+    width: 100%;*/
+
+    background-color: #2965a1;  /* Dark background for footer */
+    color: white;  /* White text */
+    text-align: center;
+    padding: 10px 0;
+
+}
+
+.info-section {
+    display: flex;
+	flex-wrap:wrap;
+    justify-content: flex-start;
+    margin-top: 40px;
+}
+
+.info-box {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+	margin:20px;
+    width: 30%;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+.info-box h3 {
+    color: #7B68EE;
+}
+
+.info-box p {
+    color: #555;
+}

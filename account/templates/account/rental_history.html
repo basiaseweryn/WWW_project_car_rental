@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your Rental History</h2>
+
+
+<object data="{% url 'rental_history_xml' %}" type="text/xml" width="100%" height="500px">
+    Your rental history could not be displayed. Please check if your browser supports XML/XSLT.
+</object>
+
+
+<a href="{% url 'account' %}">
+    <button style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">
+        Back to Account
+    </button>
+</a>
+{% endblock %}

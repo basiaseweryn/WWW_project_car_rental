@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>Login</h2>
+    <div class = "login-register-container">
+    <form method = "post">{% csrf_token %}
+    <table>
+        {% for field in login_form %}
+            <tr>
+            <td>
+                {{ field.label_tag }}
+            </td>
+            <td>
+                {{ field }}
+            </td>
+            <td>
+                {% if field.help_text %}
+                    <small style = "color: grey;"> {{ field.help_text }}</small>
+                {% endif %}
+            </td>
+            </tr>
+        {% endfor %}
+    </table>
+        {% for field in login_form %}
+
+                {% for error in field.errors %}
+                    <p style = "color: red;"> {{ error }} </p>
+                {% endfor %}
+        {% endfor %}
+
+            {% if login_form.non_field_errors %}
+
+                <div style = "color:red">
+                    <p>{{ login_form.non_field_errors }}</p>
+                </div>
+            {% endif %}
+
+
+
+         <button type = "submit">Login</button>
+
+        <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+
+    </form>
+    </div>
+
+{% endblock content %}

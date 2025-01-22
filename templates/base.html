@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}EasyRent{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="top-nav">
+    <div class="logo">
+        <strong>EasyRent</strong> - Compare, Book & Drive
+    </div>
+</header>
+
+<div class="wrapper">
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <nav class="sidebar">
+        <h2>EasyRent</h2>
+        <ul>
+            <li><a href="{% url 'search' %}">🏠 Home</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'account' %}">👤 Profile</a></li>
+                <li><a href="{% url 'logout' %}">🚪 Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">🔐 Login</a></li>
+                <li><a href="{% url 'register' %}">📝 Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
+
+
+
+<footer>
+    EasyRent, since 2021, tel.: +48 790 782 649
+    <address>Warsaw, Poland</address>
+</footer>
+
+</div>
+</body>
+</html>

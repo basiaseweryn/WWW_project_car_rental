@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class = "login-register-container">
+<h2>Booking Confirmed!</h2>
+
+<div>
+    <h>Booking Details</h>
+
+        <p><strong>Car:</strong> {{ car.brand }} {{ car.model }}</p>
+        <p><strong>Start Date:</strong> {{ start_date }}</p>
+        <p><strong>End Date:</strong> {{ end_date }}</p>
+        <p><strong>Base Price:</strong> ${{ base_price }}</p>
+        <p><strong>Young Driver Fee:</strong> ${{ young_driver_fee }}</p>
+        <p><strong>Insurance Fee:</strong> ${{ insurance_fee }}</p>
+        <p><strong>Total Price:</strong> ${{ total_price }}</p>
+        {% if car.image %}
+            <br>
+            <div class = "confirmation-image">
+                <img src="{{ car.image.url }}" alt="{{ car.model }}" width="200">
+            </div>
+        {% endif %}
+
+</div>
+
+<a href="{% url 'search' %}">
+    <button>Search for More Cars</button>
+</a>
+    </div>
+{% endblock %}

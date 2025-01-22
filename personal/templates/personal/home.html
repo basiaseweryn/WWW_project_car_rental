@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class = "search-container">
+        <h2>Rent a Car up to your standards</h2>
+        <h5>Free cancellation up to 3 days before rental! ✅ </h5>
+
+        <form method="post" action="{% url 'results' %}">
+            {% csrf_token %}
+            <div class="form-row">
+                {% for field in search_form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <p style="color: red;">{{ field.errors }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if search_form.errors %}
+            <div style="color: red;">
+                {{ search_form.errors }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class = "info-section">
+        <div class = "info-box">
+            <h3>🌍 Our Cities</h3>
+            <pre>     Warsaw             Barcelona</pre><br>
+            <pre>     Madrid               Rome</pre><br>
+            <pre>     Milan               Stuttgart</pre><br>
+            <pre>     And more...</pre>
+        </div>
+
+        <div class="info-box">
+        <h3>🚗 Our Car Brands</h3>
+            <pre>     Ford               Porsche</pre><br>
+            <pre>     Fiat              Volkswagen</pre><br>
+            <pre>     Skoda              Toyota</pre><br>
+            <pre>     And more...</pre>
+    </div>
+    <div class="info-box">
+        <h3>📊 Our Credibility</h3>
+        <p><strong>over 90%</strong> of our customers rent cars from us multiple times!</p>
+            <p><strong>Successfully</strong> completed every order</p>
+            <p>Over <strong>2000 satisfied customers</strong></p>
+        </div>
+
+
+
+    </div>
+{% endblock %}
